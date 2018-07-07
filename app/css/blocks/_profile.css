@@ -1,0 +1,11 @@
+.profile-background {
+  height: 120px;
+  background-image: url('../img/001037819.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.profile-avatar {
+  width: 90px;
+  height: 90px;
+}

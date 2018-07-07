@@ -19,7 +19,7 @@ gulp.task('server',['less'], function() {
     browserSync.init({
     	server: { baseDir: './app/'}
     })
-    gulp.watch('app/less/**/*.less', ['less']);
+    gulp.watch('app/less/**/*.*', ['less']);
     gulp.watch('app/**/*.html').on('change', browserSync.reload);
 });
 

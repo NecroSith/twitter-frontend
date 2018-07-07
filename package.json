@@ -9,6 +9,7 @@
   "author": "Yan Pustynnyy",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^4.1.1",
     "browser-sync": "^2.24.5",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
@@ -18,6 +19,7 @@
     "gulp-plumber": "^1.2.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
+    "jquery": "^3.3.1",
     "run-sequence": "^2.2.1"
   }
 }
