@@ -35,15 +35,11 @@
 							<ul class="stats">
 								<li class="stats-item">
 									<b class="stats-title">Твиты</b>
-									<b class="stats-count">666</b>
+									<b id="tweetCount" class="stats-count">0</b>
 								</li>
 								<li class="stats-item">
 									<b class="stats-title">Лайки</b>
-									<b class="stats-count">12511</b>
-								</li>
-								<li class="stats-item">
-									<b class="stats-title">Репосты</b>
-									<b class="stats-count">86</b>
+									<b id="likeCount" class="stats-count">0</b>
 								</li>
 							</ul>
 
@@ -56,44 +52,52 @@
 
 				<div class="card mb-3">
 					<div class="card-body">
-						<form>
+						<form id="postNewTweet">
 						  <div class="form-group">
-						    <input type="еуче" class="form-control" id="exampleInputEmail1"  placeholder="Что нового?">
+						    <input type="text" class="form-control" id="tweetText"  placeholder="Что нового?">
 						  </div>
 						  <button type="submit" class="btn btn-primary">Твитнуть</button>
 						</form>
 					</div>
 				</div>
-				<div class="card tweet-card tweet-card--rounded-top">
+				<div class="card card-title-only tweet-card--rounded-top">
 					<div class="h4 mb-0">Твиты пользователя</div>
 				</div>
 
-				<div class="card tweet-card">
-					<div class="tweet-date">07 июля 2018</div>
-					<div class="tweet-text font-size-large">
-						<p>Создал прототип химического газоанализатора на Arduino Uno</p>
+				<div id="tweetList">
+<!-- 
+					<div class="card tweet-card">
+						<div class="tweet-date">07 июля 2018</div>
+						<div class="tweet-text font-size-large">
+							<p>Создал прототип химического газоанализатора на Arduino Uno</p>
+						</div>
 					</div>
-				</div>
 
-				<div class="card tweet-card">
-					<div class="tweet-date">05 июля 2018</div>
-					<div class="tweet-text font-size-medium">
-						<p>Сверстал макет сайта-блога путешественников. Использовал React на полную катушку. Замечательная вещь</p>
+					<div class="card tweet-card">
+						<div class="tweet-date">05 июля 2018</div>
+						<div class="tweet-text font-size-medium">
+							<p>Сверстал макет сайта-блога путешественников. Использовал React на полную катушку. Замечательная вещь</p>
+						</div>
 					</div>
-				</div>
 
-				<div class="card tweet-card">
-					<div class="tweet-date">14 июня 2018</div>
-					<div class="tweet-text font-size-small">
-						<p>Появилась идея создать с помощью Arduino Nano механизм для автоматического открытия и закрытия шкатулки по хлопку в ладоши. Это будет крайне весело, скоро сяду за проектирование</p>
-					</div>
-				</div>
+					<div class="card tweet-card">
+						<div class="tweet-date">14 июня 2018</div>
+						<div class="tweet-text font-size-small">
+							<p>Появилась идея создать с помощью Arduino Nano механизм для автоматического открытия и закрытия шкатулки по хлопку в ладоши. Это будет крайне весело, скоро сяду за проектирование</p>
+						</div>
+					</div> -->
 
-				<div class="card tweet-card">
-					<div class="tweet-date">1 июня 2018</div>
-					<div class="tweet-text font-size-small">
-						<p>Обучение алгоритма распознаванию элементарных частиц на снимке идет куда медленнее, чем я рассчитывал - похоже дело в слабой видеокарте и том фрейворке, что я для этого использую. В Keras слишком муторно настраивать расчеты по GPU, нужно было использовать MXNet</p>
+					<div class="card tweet-card">
+						<div class="tweet-date">1 июня 2018</div>
+						<div class="tweet-text font-size-small">
+							<p>Обучение алгоритма распознаванию элементарных частиц на снимке идет куда медленнее, чем я рассчитывал - похоже дело в слабой видеокарте и том фрейворке, что я для этого использую. В Keras слишком муторно настраивать расчеты по GPU, нужно было использовать MXNet</p>
+						</div>
+						<div id="likeBtn" class="like">
+							<p>Мне нравится</p>
+							<i class="far fa-heart"></i>
+						</div>
 					</div>
+
 				</div>
 
 				<footer class="footer">
@@ -110,5 +114,6 @@
 	</div>
 	<script src='lib/jquery/dist/jquery.min.js'></script>
 	<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

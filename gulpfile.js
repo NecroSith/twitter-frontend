@@ -21,6 +21,7 @@ gulp.task('server',['less'], function() {
     })
     gulp.watch('app/less/**/*.*', ['less']);
     gulp.watch('app/**/*.html').on('change', browserSync.reload);
+    gulp.watch('app/**/*.js').on('change', browserSync.reload);
 });
 
 
