@@ -108,7 +108,8 @@ body {
 .tweet-card--rounded-top {
   border-radius: 0.25rem 0.25rem 0 0;
 }
-.like {
+.like,
+.tweetLike {
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;

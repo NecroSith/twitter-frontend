@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 	var likes = 0;
+	var idValue = 0;
 	var $tweetLikeIcon;
 	var tweetBase = [
 			{
@@ -50,6 +51,13 @@ $(document).ready(function() {
 		$('#likeCount').text(likes);
 	}
 
+	function guidGenerator() {
+    	var S4 = function() {
+       		return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    	};
+    	return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4() + Date.now());
+	}
+
 
 	var wrapURLs = function (text, new_window) {
 		var url_pattern = /(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}\-\x{ffff}0-9]+-?)*[a-z\x{00a1}\-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}\-\x{ffff}0-9]+-?)*[a-z\x{00a1}\-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}\-\x{ffff}]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?/ig;
@@ -67,7 +75,7 @@ $(document).ready(function() {
 
 		var $tweetBox = $('<div class="card tweet-card">');
 		var $tweetDate = $('<div class="tweet-date">').text(date);
-		var $tweetLikeWrapper = $('<div id="likeBtn" class="like">');
+		var $tweetLikeWrapper = $(`<div id=${guidGenerator()} class="like">`);
 		$tweetLikeText = $('<p></p>').text('Мне нравится');
 		var $tweetLikeIcon = ('<i class="far fa-heart">');
 		var $tweetText = $('<div class="tweet-text">').html(wrapURLs(text)).wrapInner('<p></p>');
@@ -101,6 +109,7 @@ $(document).ready(function() {
 
 	tweetBase.forEach( function(tweet) {
 		createTweet(tweet.date, tweet.text);
+		// $('.like').attr('id', guidGenerator());
 	});
 		
 
@@ -143,15 +152,23 @@ $(document).ready(function() {
 		$('#tweetText').val('');
 	})
 
-	$('#likeBtn').on('click', function(e) {
+	$('.like').on('click', function(e) {
+
+		var likeId = $(this).attr('id');
+		console.log(likeId);
 		// e.preventDefault();
-		$(this).addClass("active");
-
-		$('.fa-heart').removeClass('far').addClass('fas');
-
-		likes++;
-
-		countLikes();
+		if($(this).hasClass('active')) {
+			$(this).removeClass("active");
+			$(this).find('.fa-heart').removeClass('fas').addClass('far');
+			likes--;
+			countLikes();
+		}
+		else {
+			$(this).addClass("active");
+			$(this).find('.fa-heart').removeClass('far').addClass('fas');
+			likes++;
+			countLikes();
+		}
 	})
 
 });
