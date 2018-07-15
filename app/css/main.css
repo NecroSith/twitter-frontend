@@ -1,7 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #dedede;
   font-family: 'Noto Sans', sans-serif;
-  padding: 20px;
+  /*padding: 20px;*/
 }
 .card {
   background-color: white;
@@ -20,6 +24,94 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+.main-header {
+  height: 50px;
+  position: relative;
+  background-color: white;
+  margin-bottom: 20px;
+}
+.main__text {
+  display: inline-block;
+}
+.main__right-panel {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  width: 230px;
+}
+.main__menu ul {
+  display: inline-block;
+  padding: 0;
+    margin: 0;
+}
+.main__menu ul li {
+  display: inline-block;
+  margin-right: 10px;
+  border-bottom: 2px solid transparent;
+}
+.main__menu ul li:hover {
+  border-bottom: 2px solid #087de1;
+}
+.main__menu {
+  padding-top: 15px;
+}
+.menu__item {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  align-items: center;
+}
+.menu__item a {
+  display: block;
+}
+.menu__icon {
+  display: inline-block;
+}
+.menu__title {
+  display: inline-block;
+}
+.main__icon {
+  position: absolute;
+  color: #087de1;
+  top: 10px;
+  left: 50%;
+  font-size: 20px;
+}
+.main__search {
+    display: inline-block;
+}
+.main__search input {
+  border-radius: 18px;
+  padding-left: 15px;
+  font-size: 14px;
+  outline: none;
+  border: 2px solid grey;
+  height: 33px;
+}
+.main__search input:focus {
+  border: 2px solid #087de1;
+}
+.main__avatar {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  border-radius: 80px;
+  overflow: hidden;
+  border: 4px solid white;
+  background-color: white;
+  margin-top: 5px;
+}
+.main__avatar img {
+  max-width: 100%;
+  height: auto;
 }
 .profile-avatar {
   width: 90px;
@@ -166,3 +258,10 @@ body {
 .footer .fa-heart {
   color: #ce2222;
 }
+.tweet-card {
+  transition: background-color 4s ease-out;
+}
+.new {
+  background-color: #d4f5be;
+}
+

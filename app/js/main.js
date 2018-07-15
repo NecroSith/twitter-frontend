@@ -1,46 +1,7 @@
 $(document).ready(function() {
 
 	var likes = 0;
-	var idValue = 0;
 	var $tweetLikeIcon;
-	var tweetBase = [
-			{
-				date: '20 мая 2018 года',
-				text: 'Делал-делал свой проект, пока не осознал, что заказал не те батареи. Поэтому придется пожить пока без беспроводной погодной станции, зато теперь есть 3 пары 9 вольтовых батареек типа Крона :)'
-			},
-			{
-				date: '24 мая 2018 года',
-				text: 'Алгоритм распознавания элементарных частиц поставлен на обучение!'
-			},
-			{
-				date: '25 мая 2018 года',
-				text: 'Отлично! Почти завершил выпускной проект по курсу HTML в http://webcademy.ru. Свой сайт-портфолио - это звучит круто!'
-			},
-			{
-				date: '1 июня 2018 года',
-				text: 'Обучение алгоритма распознаванию элементарных частиц на снимке идет куда медленнее, чем я рассчитывал - похоже дело в слабой видеокарте и том фрейворке, что я для этого использую. В Keras слишком муторно настраивать расчеты по GPU, нужно было использовать MXNet'
-			},
-			{
-				date: '6 июня 2018 года',
-				text: 'Наткнулся на ибее на интересную штуку, черно белую делюксовую фотобумагу. Стоит очень дорого для фотобумаги, особенно с доставкой, но в нашей стране ее нет, а я планирую использовать ее для солярографии'
-			},
-			{
-				date: '14 июня 2018 года',
-				text: 'Появилась идея создать с помощью Arduino Nano механизм для автоматического открытия и закрытия шкатулки по хлопку в ладоши. Это будет крайне весело, скоро сяду за проектирование'
-			},
-			{
-				date: '22 июня 2018 года',
-				text: 'Сегодня Луна была особенно хорошо видна, так что удалось сделать несколько неплохих фоток, но после обработки в лайтруме значительного улучшения качества я не добился даже из raw. Еще одно подтверждение тому, что нужен нормальный телескоп'
-			},
-			{
-				date: '05 июля 2018 года',
-				text: 'Сверстал макет сайта-блога путешественников. Использовал React на полную катушку. Замечательная вещь'
-			},
-			{
-				date: '07 июля 2018 года',
-				text: 'Создал прототип химического газоанализатора на Arduino Uno'
-			}
-		];
 
 	var countTweets = function() {
 		var tweetCounter = $('.tweet-card').length;
@@ -50,14 +11,6 @@ $(document).ready(function() {
 	var countLikes = function() {
 		$('#likeCount').text(likes);
 	}
-
-	function guidGenerator() {
-    	var S4 = function() {
-       		return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-    	};
-    	return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4() + Date.now());
-	}
-
 
 	var wrapURLs = function (text, new_window) {
 		var url_pattern = /(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}\-\x{ffff}0-9]+-?)*[a-z\x{00a1}\-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}\-\x{ffff}0-9]+-?)*[a-z\x{00a1}\-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}\-\x{ffff}]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?/ig;
@@ -73,9 +26,9 @@ $(document).ready(function() {
 
 	var createTweet = function(date, text) {
 
-		var $tweetBox = $('<div class="card tweet-card">');
+		var $tweetBox = $('<div class="card tweet-card new">');
 		var $tweetDate = $('<div class="tweet-date">').text(date);
-		var $tweetLikeWrapper = $(`<div id=${guidGenerator()} class="like">`);
+		var $tweetLikeWrapper = $(`<div id="" class="like">`);
 		$tweetLikeText = $('<p></p>').text('Мне нравится');
 		var $tweetLikeIcon = ('<i class="far fa-heart">');
 		var $tweetText = $('<div class="tweet-text">').html(wrapURLs(text)).wrapInner('<p></p>');
@@ -104,13 +57,29 @@ $(document).ready(function() {
 
 		$('#tweetList').prepend($tweetBox);
 		countTweets();
+		setTimeout(function() {
+			$tweetBox.removeClass('new');
+		}, 2000);
 	}
 
 
-	tweetBase.forEach( function(tweet) {
-		createTweet(tweet.date, tweet.text);
-		// $('.like').attr('id', guidGenerator());
-	});
+	var showNotification = function(apiResult) {
+		console.log(apiResult);
+		if (apiResult === 'success') {
+			$('#resultSuccess').removeClass('d-none').slideDown(400, function() {
+				setTimeout(function() {
+					$('#resultSuccess').slideUp(400);
+				}, 2000);
+			});
+		}
+		else if (apiResult === 'error') {
+			$('#resultError').removeClass('d-none').slideDown(400, function() {
+				setTimeout(function() {
+					$('#resultError').slideUp(400);
+				}, 2000);
+			});
+		}
+	}
 		
 
 	var getCurrentDate = function() {
@@ -145,12 +114,33 @@ $(document).ready(function() {
 	$('#postNewTweet').on('submit', function(e) {
 		e.preventDefault();
 		
-		var tweetText = $('#tweetText').val();
+		var tweetText = $('#tweetText').val().trim();
 
-		createTweet(getCurrentDate(), tweetText);
+		if (tweetText != '') {
+			createTweet(getCurrentDate(), tweetText);
+		}
 
-		$('#tweetText').val('');
-	})
+		tweetText = wrapURLs(tweetText, true);
+
+		// console.log($('#postNewTweet').serialize());
+
+		var sendData = "tweetText=" + tweetText;
+
+		$.ajax({
+			url: 'api.php',
+			type: 'POST',
+			data: sendData,
+
+			success: function(html) {
+				// console.log(html);
+				showNotification(html);
+				if (html === 'success') {
+					countLikes();
+				}
+			}
+		});
+		
+	});
 
 	$('.like').on('click', function(e) {
 
@@ -170,5 +160,6 @@ $(document).ready(function() {
 			countLikes();
 		}
 	})
+
 
 });

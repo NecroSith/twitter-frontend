@@ -5,13 +5,13 @@
 var gulp = require('gulp'),
 	less = require('gulp-less'),
 	// sass = require('gulp-sass'),					// Uncomment this if you use SCSS
-	browserSync = require('browser-sync').create();
+	browserSync = require('browser-sync').create(),
 	notify = require('gulp-notify'), 				// For error messaging in console
 	autoprefixer = require('gulp-autoprefixer'),
 	sourcemaps = require('gulp-sourcemaps'),
 	plumber = require('gulp-plumber'), 				// For error handling
 	clean = require('gulp-clean'),
-	sequence = require('run-sequence'),
+	sequence = require('run-sequence');
 
 
 // Watch over all the important folders and refresh the page if changes were made
